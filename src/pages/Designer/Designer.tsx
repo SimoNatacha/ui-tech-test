@@ -91,9 +91,7 @@ export default function Designer() {
                     )}
                 </Form>
             </main>
-            <Aside>
-                <AsideField/>
-            </Aside>
+            <Aside/>
         </div >
     );
 }

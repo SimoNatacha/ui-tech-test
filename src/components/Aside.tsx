@@ -1,7 +1,5 @@
-import { createPortal } from "react-dom"
 
 function Aside({ children }: { children?: React.ReactNode }) {
-    const formContainer = document.getElementById("form-container");
 
     return (
         <aside
@@ -9,9 +7,8 @@ function Aside({ children }: { children?: React.ReactNode }) {
         >
             <h3 className="text-lg border-b border-gray-100">Properties</h3>
             <div className="mt-2" />
+            <div id="form-container"></div>
             {children}
-            {formContainer && createPortal(<div id="form-container">{children}</div>, formContainer)}
-
         </aside>
     )
 }
