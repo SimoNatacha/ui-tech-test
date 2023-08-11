@@ -30,7 +30,7 @@ export default function MyCombobox() {
       <Combobox.Options>
         { data && (data as Country[]).map((country:Country) => (
           <Combobox.Option key={country.code} value={country.name}>
-            {country.name}
+            {country.name.common}
           </Combobox.Option>
         ))
         }
