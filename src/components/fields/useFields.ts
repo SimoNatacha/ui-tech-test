@@ -46,6 +46,7 @@ type FieldStore = {
     updateField: UpdateFn;
     addField: AddFn;
     removeField: RemoveFn;
+    moveField: (fromIndex: number, toIndex: number) => void;
 };
 
 export const useFormStore = create<FieldStore>((set ) => ({
@@ -64,18 +65,27 @@ export const useFormStore = create<FieldStore>((set ) => ({
         set((state) => ({
         fields: state.fields.filter((f) => f.id !== id),
         })),
+
+    moveField: (fromIndex, toIndex) =>
+    set((state) => {
+        const fields = [...state.fields];
+        const [movedField] = fields.splice(fromIndex, 1);
+        fields.splice(toIndex, 0, movedField);
+        return { fields };
+    }),
+
     }));
 
 /**
  * A hook for managing form fields 
- * TODO: complete this hook by wiring up the form store
+
  * @returns 
  */
 function useFields() {
 
-    const { fields, updateField, addField, removeField } = useFormStore();
+    const { fields, updateField, addField, removeField ,moveField} = useFormStore();
 
-    return { fields, updateField, addField, removeField };
+    return { fields, updateField, addField, removeField,moveField };
 }
 
 export default useFields;

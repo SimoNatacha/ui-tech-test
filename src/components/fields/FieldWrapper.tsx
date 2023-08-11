@@ -10,17 +10,16 @@ function FieldWrapper({ children, className,  ...props }: React.HTMLAttributes<H
     const handleRemoveField = () => {
         remove(id);
     }
-
     return (
         <div
             className={classNames("flex items-baseline gap-1", className)}
+
             {...props}
         >
             <button
                 type="button"
                 tabIndex={-1}
-                className={classNames("cursor-grab", { "flex": isEditable, "hidden": !isEditable })}
-            >
+                className={classNames("cursor-grab", { "flex": isEditable, "hidden": !isEditable })}>
                 {/** Drag icon */}
                 <Bars3Icon className="w-5 h-5 text-gray-400" />
             </button>

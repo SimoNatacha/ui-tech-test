@@ -9,7 +9,16 @@ import ModeSwitch from '../../components/ModeSwitch/ModeSwitch';
 import Aside from '../../components/Aside';
 
 export default function Designer() {
-    const { fields, addField, removeField } = useFields();
+    const { fields,_, addField, removeField ,moveField} = useFields();
+
+    {/**const handleDragEnd = ({ active, over }: { active: any; over: any }) => {
+        if (active.id !== over.id) {
+          const fromIndex = fields.findIndex((field) => field.id === active.id);
+          const toIndex = fields.findIndex((field) => field.id === over.id);
+          moveField(fromIndex, toIndex);
+        }
+      };*/}
+    
    {/**  const [mode] = useMode() */}
     const mode = "edit"
     return (
