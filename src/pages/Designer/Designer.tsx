@@ -7,7 +7,6 @@ import { Form } from 'react-router-dom';
 {/** import { useMode } from '../../components/ModeSwitch'; */ }
 import ModeSwitch from '../../components/ModeSwitch/ModeSwitch';
 import Aside from '../../components/Aside';
-import Combobx from '../../components/fields/Combobox';
 import MyCombobox from '../../components/fields/MyCombo';
 import AsideField from '../../components/fields/AsideField';
 
