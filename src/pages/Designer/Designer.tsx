@@ -4,12 +4,15 @@ import Label from '../../components/fields/Label';
 import useFields, { Submit, Input, AddFn, RemoveFn } from '../../components/fields/useFields';
 import FieldWrapper from '../../components/fields/FieldWrapper';
 import { Form } from 'react-router-dom';
-{/** import { useMode } from '../../components/ModeSwitch'; */}
+{/** import { useMode } from '../../components/ModeSwitch'; */ }
 import ModeSwitch from '../../components/ModeSwitch/ModeSwitch';
 import Aside from '../../components/Aside';
+import Combobx from '../../components/fields/Combobox';
+import MyCombobox from '../../components/fields/MyCombo';
+import AsideField from '../../components/fields/AsideField';
 
 export default function Designer() {
-    const { fields,_, addField, removeField ,moveField} = useFields();
+    const { fields, _, addField, removeField, moveField } = useFields();
 
     {/**const handleDragEnd = ({ active, over }: { active: any; over: any }) => {
         if (active.id !== over.id) {
@@ -18,8 +21,8 @@ export default function Designer() {
           moveField(fromIndex, toIndex);
         }
       };*/}
-    
-   {/**  const [mode] = useMode() */}
+
+    {/**  const [mode] = useMode() */ }
     const mode = "edit"
     return (
         <div className='h-screen w-screen flex items-stretch'>
@@ -28,6 +31,7 @@ export default function Designer() {
                     <h1 className='text-xl'>Mini form builder</h1>
                     <ModeSwitch />
                 </div>
+                <MyCombobox />
                 <Form
                     method='POST'
                     action="/response"
@@ -88,7 +92,9 @@ export default function Designer() {
                     )}
                 </Form>
             </main>
-            <Aside />
+            <Aside>
+                <AsideField/>
+            </Aside>
         </div >
     );
 }

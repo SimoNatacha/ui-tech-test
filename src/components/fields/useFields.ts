@@ -19,7 +19,7 @@ export type Combobox = {
     type: "country",
     text?: never,
     id: string,
-    label: string | null
+    label: string | null,
     placeholder: string,
 }
 export type Field = Input | Submit | Combobox
