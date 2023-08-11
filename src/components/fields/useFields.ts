@@ -1,4 +1,5 @@
 import { v4 } from "uuid"
+import { create } from "zustand"
 
 export type Submit = {
     type: "submit",
@@ -23,6 +24,11 @@ export type Combobox = {
 }
 export type Field = Input | Submit | Combobox
 
+export type UpdateFn = (field: Field, id: string) => void;
+export type AddFn = (field: Field) => void;
+export type RemoveFn = (id: string) => void;
+
+
 
 const generateRandomUUID = () => {
     return v4() // this may be replaced with other uuid generators
@@ -35,11 +41,30 @@ const INIT_FIELDS: Field[] = [
     { type: "submit", text: "submit", id: generateRandomUUID() }
 ]
 
-/**
- * A store for managing form fields
- * TODO: implement a store for managing form fields
- **/
+type FieldStore = {
+    fields: Field[];
+    updateField: UpdateFn;
+    addField: AddFn;
+    removeField: RemoveFn;
+};
 
+export const useFormStore = create<FieldStore>((set ) => ({
+    fields: INIT_FIELDS,
+    updateField: (field, id) =>
+        set((state) => ({
+        fields: state.fields.map((fieldItem) => (fieldItem.id === id ? field : fieldItem)),
+        })),
+
+        addField: (field) =>
+        set((state) => ({
+        fields: [...state.fields, field],
+        })),
+
+    removeField: (id) =>
+        set((state) => ({
+        fields: state.fields.filter((f) => f.id !== id),
+        })),
+    }));
 
 /**
  * A hook for managing form fields 
@@ -48,7 +73,9 @@ const INIT_FIELDS: Field[] = [
  */
 function useFields() {
 
-    return { fields: INIT_FIELDS, }
+    const { fields, updateField, addField, removeField } = useFormStore();
+
+    return { fields, updateField, addField, removeField };
 }
 
 export default useFields;

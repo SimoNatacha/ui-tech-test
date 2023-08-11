@@ -1,17 +1,17 @@
 import InputField from '../../components/fields/InputField';
 import ButtonField from '../../components/fields/SubmitField';
 import Label from '../../components/fields/Label';
-import useFields, { Submit, Input } from '../../components/fields/useFields';
+import useFields, { Submit, Input, AddFn, RemoveFn } from '../../components/fields/useFields';
 import FieldWrapper from '../../components/fields/FieldWrapper';
 import { Form } from 'react-router-dom';
-import { useMode } from '../../components/ModeSwitch';
+{/** import { useMode } from '../../components/ModeSwitch'; */}
 import ModeSwitch from '../../components/ModeSwitch/ModeSwitch';
 import Aside from '../../components/Aside';
 
 export default function Designer() {
-    const { fields, } = useFields();
-    const [mode] = useMode();
-
+    const { fields, addField, removeField } = useFields();
+   {/**  const [mode] = useMode() */}
+    const mode = "edit"
     return (
         <div className='h-screen w-screen flex items-stretch'>
             <main className='max-w-xl mx-auto mt-10 grow'>
@@ -38,8 +38,8 @@ export default function Designer() {
                                 );
                             case "submit":
                                 return (
-                                    <FieldWrapper id={f.id} key={f.id} className="mt-4" >
-                                        <ButtonField {...f as Submit} />
+                                    <FieldWrapper id={f.id} key={f.id} className="mt-4" {...removeField as RemoveFn} >
+                                        <ButtonField {...f as Submit} {...addField as AddFn} />
                                     </FieldWrapper>);
                         }
                     })}

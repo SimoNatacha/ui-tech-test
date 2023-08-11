@@ -2,10 +2,14 @@ import { Bars3Icon, TrashIcon } from "@heroicons/react/24/outline";
 import classNames from "classnames";
 import React from "react";
 import { useMode } from "../ModeSwitch";
+import { RemoveFn } from "./useFields";
 
-function FieldWrapper({ children, className, onRemove, ...props }: React.HTMLAttributes<HTMLDivElement> & { id: string, onRemove?: () => void }) {
+function FieldWrapper({ children, className,  ...props }: React.HTMLAttributes<HTMLDivElement>, id: string, remove: RemoveFn) {
     const [mode] = useMode()
     const isEditable = mode == "edit"
+    const handleRemoveField = () => {
+        remove(id);
+    }
 
     return (
         <div
@@ -22,7 +26,7 @@ function FieldWrapper({ children, className, onRemove, ...props }: React.HTMLAtt
             </button>
             <button
                 type="button"
-                onClick={onRemove}
+                onClick={handleRemoveField}
                 tabIndex={-1}
                 className={classNames({ "flex": isEditable, "hidden": !isEditable })}
             >
